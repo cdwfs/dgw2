@@ -1,0 +1,67 @@
+Menu
+════════════════════════════════════════════════════════════════════════
+const MENU_ITEMS = ["Play","About"]
+const SFX_MENU_CURSOR_MOVE = cursor_move_sound
+const SFX_MENU_CURSOR_ACCEPT = cursor_move_sound // TODO
+
+// Used to fade the screen to black during a mode transition
+def fade_out(frames_left, total_frames, data):
+    let t = 1-(total_frames - frames_left) / total_frames
+    set_post_effects({
+        color: rgb(t,t,t),
+        color_blend: "multiply",
+        })
+
+
+let ignore_input = false
+let selected = 0
+let drops = []
+let drop_cooldown = 0
+
+enter
+────────────────────────────────────────────────────────────────────────
+ignore_input=false
+selected=0
+drops=[]
+drop_cooldown=0
+
+
+frame
+────────────────────────────────────────────────────────────────────────
+// input
+if not ignore_input:
+    let pad = gamepad_array[0]
+    if pad.yy < 0:
+        play_sound(SFX_MENU_CURSOR_MOVE)
+        selected = (selected + 1) mod 2
+    else if pad.yy > 0:
+        play_sound(SFX_MENU_CURSOR_MOVE)
+        selected = (selected + 1) mod 2
+    if pad.aa:
+        play_sound(SFX_MENU_CURSOR_ACCEPT)
+        ignore_input = true
+        def to_mode():
+            if MENU_ITEMS[selected] == "Play":
+                set_mode(Team) because "Choose 'Play' from menu"
+            else if MENU-ITEMS[selected] == "About":
+                set_mode(About) because "Choose 'About' from menu"
+        add_frame_hook(fade_out, to_mode, 30)
+// update water drops
+def update_drop(d):
+    d.vel.y += 0.3
+    d.pos += d.vel
+    if d.pos.y ≥ SCREEN_SIZE.y: return iterate.REMOVE
+iterate(drops,update_drop)
+if drop_cooldown > 0:
+    drop_cooldown -= 1
+else:
+    drop_cooldown = random_integer(5,15)
+    push(drops, {
+        pos: random_within_region({pos:xy(50,50), size:xy(100,50)}),
+        vel: xy(0,0),
+        })
+
+leave
+────────────────────────────────────────────────────────────────────────
+reset_post_effects()
+remove_frame_hooks_by_mode(get_mode())

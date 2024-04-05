@@ -1,0 +1,54 @@
+{
+    "title": "Super Don't Get Wet HD",
+    "developer": "Bitterly Indifferent Games",
+    "copyright": "©2024 Cort Stratton",
+    "license": "Released into the public domain; CC0 licensed https://creativecommons.org/share-your-work/public-domain/cc0/",
+    "packages": [],
+    "scripts": [],
+    "modes": [
+        "Menu",
+        "About",
+        "Combat",
+        "Victory",
+        "Team"
+    ],
+    "start_mode": "Menu",
+    "docs": [],
+    "assets": {
+        "font": "quad://fonts/deja-8.font.json",
+        "astronaut": "quad://sprites/kenney-alien-yellow-16x32.sprite.json",
+        "sheet_sprite": "assets/sheet.sprite.json",
+        "maptiles_sprite": "assets/tiles.sprite.json",
+        "cursor_move_sound": "assets/cursor_move.sound.json"
+    },
+    "version": 0,
+    "min_players": 2,
+    "max_players": 4,
+    "cooperative": true,
+    "competitive": true,
+    "achievements": false,
+    "highscores": false,
+    "dual_dpad": false,
+    "midi_sysex": false,
+    "description": "Description of your game in about 100 characters.",
+    "constants": {
+        "TEXT_COLOR": {
+            "type": "rgb",
+            "value": {
+                "r": {
+                    "type": "number",
+                    "value": 1
+                },
+                "g": {
+                    "type": "number",
+                    "value": 1
+                },
+                "b": {
+                    "type": "number",
+                    "value": 1
+                }
+            }
+        }
+    },
+    "screenshot_tag": "Super Don't Get Wet"
+}
